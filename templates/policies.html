@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>All Policies</h3>
+<table class="table table-striped table-bordered mt-3">
+<tr><th>No</th><th>Holder</th><th>Type</th><th>Premium</th><th>Status</th></tr>
+{% for p in policies %}
+<tr>
+  <td>{{ p.policy_number }}</td>
+  <td>{{ p.holder.full_name }}</td>
+  <td>{{ p.policy_type }}</td>
+  <td>{{ p.premium_amount }} TZS</td>
+  <td><span class="badge bg-success">{{ p.status }}</span></td>
+</tr>
+{% endfor %}
+</table>
+{% endblock %}

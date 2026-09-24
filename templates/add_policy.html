@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>Add Policy</h3>
+<form method="POST" class="card p-4">
+  <select class="form-control mb-2" name="holder_id" required>
+    {% for h in holders %}
+    <option value="{{ h.id }}">{{ h.full_name }} - {{ h.nida_number }}</option>
+    {% endfor %}
+  </select>
+  <input class="form-control mb-2" name="policy_number" placeholder="POL-2025-001" required>
+  <select class="form-control mb-2" name="type">
+    <option>Motor</option><option>Health</option><option>Life</option><option>Property</option>
+  </select>
+  <input class="form-control mb-2" name="premium" type="number" placeholder="Premium TZS" required>
+  <input class="form-control mb-3" name="coverage" type="number" placeholder="Coverage Amount" value="10000000">
+  <button class="btn btn-primary">Create Policy</button>
+</form>
+{% endblock %}

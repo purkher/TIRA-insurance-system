@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>TIRA Management Report</h3>
+<p class="text-muted">Generated: {{ now }} | For Principal ICT Officer Interview</p>
+
+<div class="row g-3 mb-4">
+  <div class="col-md-3"><div class="card p-3 bg-primary text-white"><h4>{{ total_policies }}</h4><small>Total Policies Issued</small></div></div>
+  <div class="col-md-3"><div class="card p-3 bg-success text-white"><h4>{{ total_premium }} TZS</h4><small>Total Premium Collected</small></div></div>
+  <div class="col-md-3"><div class="card p-3 bg-warning"><h4>{{ total_claims }} ({{ pending }} Pending)</h4><small>Claims Overview</small></div></div>
+  <div class="col-md-3"><div class="card p-3 bg-danger text-white"><h4>{{ total_claim_amount }} TZS</h4><small>Total Claims Value</small></div></div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="card p-3">
+      <h5>Claims Status Breakdown</h5>
+      <table class="table">
+        <tr><td>Pending</td><td><span class="badge bg-warning">{{ pending }}</span></td></tr>
+        <tr><td>Approved</td><td><span class="badge bg-success">{{ approved }}</span></td></tr>
+        <tr><td>Rejected</td><td><span class="badge bg-danger">{{ rejected }}</span></td></tr>
+      </table>
+      <p>Approval Rate: <strong>{{ (approved / total_claims * 100)|round(1) if total_claims > 0 else 0 }}%</strong></p>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card p-3">
+      <h5>Policy Portfolio by Type</h5>
+      <table class="table">
+        <tr><td>Motor Insurance</td><td>{{ motor }}</td></tr>
+        <tr><td>Health Insurance</td><td>{{ health }}</td></tr>
+        <tr><td>Life Insurance</td><td>{{ life }}</td></tr>
+      </table>
+      <hr>
+      <p class="mb-0"><strong>Insight:</strong> Total exposure is {{ total_claim_amount }} against premium of {{ total_premium }}. Loss Ratio = {{ (total_claim_amount / total_premium * 100)|round(1) if total_premium > 0 else 0 }}%</p>
+    </div>
+  </div>
+</div>
+
+<div class="mt-3">
+  <a href="/dashboard" class="btn btn-secondary">Back to Dashboard</a>
+  <button onclick="window.print()" class="btn btn-primary">Print Report (PDF)</button>
+</div>
+{% endblock %}

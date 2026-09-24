@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>Manage Claims</h3>
+<a href="/claims/add" class="btn btn-warning mb-3">+ Submit Claim</a>
+<table class="table table-bordered">
+<tr><th>Claim No</th><th>Policy</th><th>Amount</th><th>Status</th><th>Date</th><th>Action</th></tr>
+{% for c in claims %}
+<tr>
+<td>{{ c.claim_number }}</td>
+<td>{{ c.policy.policy_number }}</td>
+<td>{{ c.amount_claimed }}</td>
+<td>
+  {% if c.status == 'Pending' %}<span class="badge bg-warning">{{ c.status }}</span>
+  {% elif c.status == 'Approved' %}<span class="badge bg-success">{{ c.status }}</span>
+  {% else %}<span class="badge bg-danger">{{ c.status }}</span>{% endif %}
+</td>
+<td>{{ c.submitted_date.strftime('%Y-%m-%d') if c.submitted_date else '' }}</td>
+<td>
+  {% if c.status == 'Pending' and current_user.role != 'Customer' %}
+    <a href="/claims/{{ c.id }}/approve" class="btn btn-sm btn-success">Approve</a>
+    <a href="/claims/{{ c.id }}/reject" class="btn btn-sm btn-danger">Reject</a>
+  {% else %}
+    -
+  {% endif %}
+</td>
+</tr>
+{% endfor %}
+</table>
+{% endblock %}

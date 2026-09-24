@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>Submit New Claim (Customer)</h3>
+<form method="POST" class="card p-4">
+  <select class="form-control mb-2" name="policy_id" required>
+    {% for p in policies %}
+    <option value="{{ p.id }}">{{ p.policy_number }} - {{ p.holder.full_name }}</option>
+    {% endfor %}
+  </select>
+  <textarea class="form-control mb-2" name="description" placeholder="What happened? Describe loss..." required></textarea>
+  <input class="form-control mb-3" name="amount" type="number" placeholder="Claim Amount TZS" required>
+  <button class="btn btn-warning">Submit Claim</button>
+</form>
+{% endblock %}
