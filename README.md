@@ -1,71 +1,135 @@
-# TIRA Insurance Management System - Tanzania
+# TIRA Insurance Management System
 
-A complete insurance management system compliant with the Tanzania Insurance Regulatory Authority (TIRA) for small insurance operations. Built with Flask to automate policy issuance, claims handling, reporting, and compliance tracking.
+A complete insurance management system built for Tanzania, aligned with the requirements of the Tanzania Insurance Regulatory Authority (TIRA). This project helps small insurance businesses manage policy issuance, claims processing, KYC verification, and compliance reporting through a web-based dashboard.
 
-## Features Implemented
+## Overview
 
-- Role-Based Access Control: Admin (full access), Agent (policies & claims), Customer (view & claim)
-- Policy Holder Management: Full Name, NIDA 20-digit validation, Phone (255), Email, Address
-- Policy Management: Auto Policy Number `POL-YYYY-XXX`, Premium auto-calc 5% of sum insured, Types: Motor, Life, Health, Property
-- Claims Management: Submit, Approve, Reject workflow, Auto Claim Number `CLM-YYYY-XXX`
-- Dashboard Analytics: Total Policies, Holders, Premiums, Claims with Chart.js visualization
-- TIRA Reports: Compliance report, Premium collection, Claims ratio, Export-ready tables
-- KYC Compliance: Document upload (NIDA Card, Driving License, Passport)
-- Security: Password hashing (Werkzeug), Flask-Login, Input validation
+The system is designed to support the core operations of a small insurance business with simple, secure, and role-based management features. It includes:
+
+- policy holder registration and validation
+- policy creation and premium calculation
+- claims submission and approval workflow
+- dashboard analytics and compliance reporting
+- user role management for admin, agent, and customer access
+- KYC document uploads for identity verification
+
+## Key Features
+
+- Role-Based Access Control
+  - Admin: full access to the system
+  - Agent: manage policies and claims
+  - Customer: view records and submit claims
+
+- Policy Holder Management
+  - Full name
+  - NIDA validation (20 digits)
+  - Phone number validation for Tanzania
+  - Email and address capture
+
+- Policy Management
+  - Auto-generated policy numbers in the format `POL-YYYY-XXX`
+  - Premium calculated automatically at 5% of the insured value
+  - Covered policy types: Motor, Life, Health, and Property
+
+- Claims Management
+  - Submit claims
+  - Approve or reject claims
+  - Auto-generated claim numbers in the format `CLM-YYYY-XXX`
+
+- Dashboard Analytics
+  - Total policies
+  - Total holders
+  - Premium totals
+  - Claims overview
+  - Chart.js-based visual reports
+
+- TIRA Reporting
+  - Compliance summaries
+  - Premium collection reports
+  - Claims ratio reporting
+  - Export-ready report tables
+
+- KYC Compliance
+  - Upload supporting documents such as NIDA card, passport, and driving license
+
+- Security
+  - Password hashing with Werkzeug
+  - Flask-Login session management
+  - Input validation and user access restrictions
 
 ## Tech Stack
 
-- Backend: Python 3 + Flask
-- Database: SQLAlchemy + SQLite (`insurance.db`)
-- Authentication: Flask-Login + Werkzeug Security
-- Frontend: Bootstrap 5 + Chart.js + Jinja2 Templates
+- Python 3
+- Flask
+- SQLAlchemy
+- SQLite
+- Flask-Login
+- Bootstrap 5
+- Chart.js
+- Jinja2 Templates
 
 ## Project Structure
 
 ```text
 TIRA-insurance-system/
 ├── app.py                     # Main Flask application
-├── insurance.db               # SQLite database (auto-created on first run)
+├── insurance.db               # SQLite database (created automatically)
 ├── README.md                  # Project documentation
 ├── templates/
-│   ├── base.html              # Main layout, navbar, sidebar, flash messages
-│   ├── login.html             # Login form
-│   ├── register.html          # User registration form
-│   ├── dashboard.html         # Dashboard with stats and Chart.js
-│   ├── holders.html           # Policy holders list
-│   ├── add_holder.html        # Add new holder with NIDA validation
-│   ├── policies.html          # Policies list
-│   ├── add_policy.html        # Add policy with auto calculation
-│   ├── claims.html            # Claims list and approval flow
-│   ├── add_claim.html         # Submit new claim form
-│   ├── reports.html           # TIRA compliance reports
-│   └── kyc_upload.html        # KYC upload page
+│   ├── base.html              # Shared layout and navigation
+│   ├── login.html             # Login page
+│   ├── register.html          # Registration page
+│   ├── dashboard.html         # Dashboard and analytics
+│   ├── holders.html           # Policy holder list
+│   ├── add_holder.html        # Add a new holder
+│   ├── policies.html          # Policy list
+│   ├── add_policy.html        # Add a new policy
+│   ├── claims.html            # Claims overview and management
+│   ├── add_claim.html         # Submit a claim
+│   ├── reports.html           # TIRA report panel
+│   └── kyc_upload.html        # KYC document upload page
 ├── static/
 │   ├── css/
-│   │   └── style.css          # Custom styles
+│   │   └── style.css          # Custom styling
 │   ├── js/
-│   │   └── chart.js           # Dashboard chart logic
-│   └── uploads/               # Uploaded KYC documents
+│   │   └── chart.js           # Chart.js logic for analytics
+│   └── uploads/               # Uploaded KYC files
 ├── venv/                      # Optional virtual environment
 ├── .gitignore                 # Git ignore rules
-└── requirements.txt           # Python dependencies (if used)
+├── requirements.txt           # Python dependencies (if used)
+└── LICENSE                    # Project license (if added)
 ```
 
-## Installation & Run
+## Getting Started
 
-### 1. Install dependencies
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/purkher/TIRA-insurance-system.git
+cd TIRA-insurance-system
+```
+
+### 2. Create a virtual environment
+
+```bash
+python -m venv venv
+source venv/bin/activate   # Linux/macOS
+venv\Scripts\activate      # Windows
+```
+
+### 3. Install dependencies
 
 ```bash
 pip install flask flask-sqlalchemy flask-login
 ```
 
-### 2. Run the app
+### 4. Run the app
 
 ```bash
 python app.py
 ```
 
-### 3. Open in browser
+### 5. Open the app
 
 ```text
 http://127.0.0.1:5000
@@ -73,44 +137,60 @@ http://127.0.0.1:5000
 
 ## Default Accounts
 
-The database is auto-created on first run:
+When the database is created for the first time, the following default users are generated:
 
 | Username | Password | Role | Access |
 | --- | --- | --- | --- |
-| admin | admin123 | Admin | Full system |
-| agent1 | agent123 | Agent | Policies & Claims |
-| customer1 | customer123 | Customer | View & Submit Claims |
+| admin | admin123 | Admin | Full system access |
+| agent1 | agent123 | Agent | Policies and claims management |
+| customer1 | customer123 | Customer | View and claim access |
 
-## Workflow Test (Demo Steps)
+## Demo Workflow
 
-1. Login as `admin / admin123`
-2. Add a policy holder: `Imani Milinga`, NIDA: `19980101234567890123`
-3. Add a policy: select holder, set sum insured to `20,000,000`, then confirm premium auto-calculates to `1,000,000`
-4. Log out, register as a new customer, and log in
-5. Submit a claim: select policy, enter amount and reason
-6. Log out, log in as admin, manage claims, and approve the claim
-7. Check the dashboard and reports
+1. Log in as `admin / admin123`
+2. Add a policy holder, for example:
+   - Name: `Imani Milinga`
+   - NIDA: `19980101234567890123`
+3. Create a policy for the holder
+4. Set the sum insured to `20,000,000`
+5. Confirm that the premium is automatically calculated as `1,000,000`
+6. Log out and register a new customer account
+7. Log in as the customer and submit a claim
+8. Log out and log back in as admin
+9. Approve the claim from the claims management section
+10. Review the dashboard and compliance reports
 
-## Compliance Notes (TIRA)
+## Compliance Notes
 
-- NIDA validation: 20-digit regex `^\d{20}$`
-- Premium: 5% of sum insured (TIRA minimum rate)
-- Phone: Tanzania format `+255` or `0xxx`
-- Policy Number: `POL-YYYY-XXX` unique
-- Dates stored in UTC and displayed as `YYYY-MM-DD`
+This system is designed as a TIRA-aligned demo for educational and operational planning purposes.
 
-## Future Improvements
+- NIDA validation uses a 20-digit format: `^\d{20}$`
+- Premium calculation follows a 5% rate of the sum insured
+- Phone validation supports Tanzanian number formats such as `+255` and `0xxx`
+- Policy numbers follow the format `POL-YYYY-XXX`
+- Claim numbers follow the format `CLM-YYYY-XXX`
+- Dates are stored in UTC and displayed in `YYYY-MM-DD`
 
-- M-Pesa / Tigo Pesa payment integration
+## Future Enhancements
+
+- M-Pesa and Tigo Pesa payment integration
 - PDF policy certificate generation
-- SMS notifications via Beem Africa
-- TIRA API integration for real compliance
+- SMS notifications with Beem Africa
+- TIRA API integration for live compliance validation
+- Better report export options and audit history
+- Enhanced dashboard filters and chart customization
 
 ## Author
 
-Imani Milinga - Insurance Management System  
-Ruvuma, Tanzania - 2026
+Imani Milinga  
+Insurance Management System  
+Ruvuma, Tanzania  
+2026
 
 ## License
 
 Academic Use - TIRA Compliant Demo System
+
+## Conclusion
+
+This project is a practical demonstration of a small-scale insurance management platform tailored to the Tanzanian regulatory environment. It can be used as a foundation for a more complete commercial system, with further expansion into billing, notifications, document signing, and integration with external insurance infrastructure.
