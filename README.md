@@ -13,6 +13,49 @@ The system is designed to support the core operations of a small insurance busin
 - user role management for admin, agent, and customer access
 - KYC document uploads for identity verification
 
+## Screenshots
+
+Add your project screenshots in a `screenshots/` folder and reference them in this section.
+
+```bash
+mkdir -p screenshots
+```
+
+Example layout:
+
+```text
+screenshots/
+├── dashboard.png
+├── policies.png
+├── claims.png
+├── reports.png
+└── login.png
+```
+
+Use the following format in the README:
+
+```md
+### Dashboard
+![Dashboard](screenshots/dashboard.png)
+
+### Policies
+![Policies](screenshots/policies.png)
+
+### Claims Management
+![Claims Management](screenshots/claims.png)
+
+### Reports
+![Reports](screenshots/reports.png)
+```
+
+Recommended screenshots to include:
+- Login page
+- Dashboard overview
+- Policy registration form
+- Claims management page
+- TIRA reports page
+- KYC upload page
+
 ## Key Features
 
 - Role-Based Access Control
